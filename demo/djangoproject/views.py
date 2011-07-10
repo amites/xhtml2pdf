@@ -5,26 +5,16 @@ from django import http
 from django.shortcuts import render_to_response
 from django.template.loader import get_template
 from django.template import Context
+from django.views.decorators.csrf import csrf_exempt                                          
 import xhtml2pdf.pisa as pisa
 import cStringIO as StringIO
 import cgi
 
+@csrf_exempt
 def index(request):
-    return http.HttpResponse("""
-        <html><body>
-            <h1>Example 1</h1>
-            Please enter some HTML code:
-            <form action="/download/" method="post" enctype="multipart/form-data">
-            <textarea name="data">Hello <strong>World</strong></textarea>
-            <br />
-            <input type="submit" value="Convert HTML to PDF" />
-            </form>
-            <hr>
-            <h1>Example 2</h1>
-            <p><a href="ezpdf_sample">Example with template</a>
-        </body></html>
-        """)
+    return render_to_response('index.html')
 
+@csrf_exempt
 def download(request):
     if request.POST:
         result = StringIO.StringIO()

@@ -19,3 +19,4 @@ testrender/output/
 *.swp
 .coverage
 htmlcov/
+*.egg-info
